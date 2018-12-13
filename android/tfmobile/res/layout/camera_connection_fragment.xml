@@ -23,11 +23,26 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
 
-    <org.tensorflow.demo.RecognitionScoreView
-        android:id="@+id/results"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
-        android:layout_alignParentTop="true" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/button"
+            android:background="@drawable/icon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
+
+        <org.tensorflow.demo.RecognitionScoreView
+            android:id="@+id/results"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true"
+            />
+    </LinearLayout>
 
     <org.tensorflow.demo.OverlayView
         android:id="@+id/debug_overlay"

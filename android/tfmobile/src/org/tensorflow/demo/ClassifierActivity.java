@@ -16,6 +16,7 @@
 
 package org.tensorflow.demo;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -31,6 +32,9 @@ import android.os.Trace;
 import android.util.Size;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
+
 import java.util.List;
 import java.util.Vector;
 import org.tensorflow.demo.OverlayView.DrawCallback;
@@ -105,6 +109,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private BorderedText borderedText;
 
   private long lastProcessingTimeMs;
+
+  private Button button;
 
   @Override
   protected int getLayoutId() {
@@ -228,6 +234,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
       ImageUtils.saveBitmap(croppedBitmap);
     }
 
+    button = (Button) findViewById(R.id.button);
+
     runInBackground(
         new Runnable() {
           @Override
@@ -240,6 +248,15 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             resultsView.setResults(results);
             requestRender();
             computing = false;
+
+            button.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                Intent it = new Intent(ClassifierActivity.this, ResultActivity.class);
+                it.putExtra("result", results.get(0).toString());
+                startActivity(it);
+              }
+            });
           }
         });
 
